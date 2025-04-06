@@ -92,7 +92,7 @@ removeAt n (x : xs)
 --
 -- ♫ NOTE: Use eta-reduction and function composition (the dot (.) operator)
 --  in this function.
-evenLists :: [[Int]] -> [[Int]]
+evenLists :: [[a]] -> [[a]]
 evenLists = filter (even . length)
 
 -- evenLists xs = filter (\x -> even (length x) ) xs
@@ -111,7 +111,15 @@ evenLists = filter (even . length)
 --
 -- 🕯 HINT: look into Data.Char and Prelude modules for functions you may use.
 dropSpaces :: String -> String
-dropSpaces = filter (not . isSeparator)
+dropSpaces = dps ""
+  where
+    dps :: String -> String -> String
+    dps acc "" = acc
+    dps acc (s : ss)
+      | isSeparator s = if not (null acc) then acc else dps "" ss
+      | otherwise = dps (acc ++ [s]) ss
+
+-- dropSpaces = filter (not . isSeparator) # lol
 
 -- |
 --
@@ -378,5 +386,6 @@ constantFolding = rebuild . optimize . flatten
 
     rebuild :: ([Expr], Int) -> Expr
     rebuild ([], total) = Lit total
+    rebuild ([v], 0) = v
     rebuild (v : vs, 0) = Add v (rebuild (vs, 0))
     rebuild (vs, total) = Add (Lit total) (rebuild (vs, 0))
