@@ -28,3 +28,7 @@ test-lecture3:
 .PHONY: test-lecture4
 test-lecture4:
 	cabal run exercises-test --enable-tests -- -m "Lecture 4"
+
+.PHONY: test-fast
+test-fast:
+	cabal run exercises-test --enable-tests -- -m "Fast"

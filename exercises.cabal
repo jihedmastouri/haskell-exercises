@@ -68,11 +68,18 @@ library
                        Lecture2
                        Lecture3
                        Lecture4
+                       Lecture4_fastParser
 
 executable lecture4
   import:              common-options, common-exe
   hs-source-dirs:      app
   main-is:             Main.hs
+  build-depends:       base, exercises
+
+executable fast
+  import:              common-options, common-exe
+  hs-source-dirs:      app
+  main-is:             Main2.hs
   build-depends:       base, exercises
 
 executable generate-many-products
@@ -91,6 +98,7 @@ test-suite exercises-test
                        Test.Lecture2
                        Test.Lecture3
                        Test.Lecture4
+                       Test.Fast
 
   build-depends:       exercises
                      , hspec             >= 2.9 && < 2.12
